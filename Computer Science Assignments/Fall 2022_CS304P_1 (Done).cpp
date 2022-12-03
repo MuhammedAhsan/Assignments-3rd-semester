@@ -1,5 +1,3 @@
-//ID: bc210408162
-
 #include <iostream>
 #include <iomanip>
 using namespace std;
