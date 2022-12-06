@@ -5,8 +5,11 @@ using namespace std;
 class Student{
 	private:
 		string student_ID, student_name;
-		int quiz_marks[4], assignment_marks[2], mid_term_marks, final_term_marks, total_marks;
+		int quiz_marks[4], assignment_marks[2], mid_term_marks, final_term_marks;
+		float total_marks;
 	public:
+		
+		
 		Student(){
 			student_ID = "none";
 			student_name = "none";
@@ -86,26 +89,21 @@ class Student{
 				}
 			}
 		}
-		
+
 		void calculateResult(){
-			int obt_quiz, obt_assignment, quiz, assignment, mids, finals;
+			int obt_quiz=0, obt_assignment=0;
 			
 			for(int k=0; k<4; k++){
 				obt_quiz += quiz_marks[k];
-				cout<<quiz_marks[k];
 			}
 			
 			for(int l=0; l<2; l++){
 				obt_assignment += assignment_marks[l];
 			}
 			
-//			quiz = (obt_quiz/40)*0.1;
-//			assignment = (obt_assignment/40)*0.20;
-//			mids = (mid_term_marks/40) * 0.30;
-//			finals = (final_term_marks/60) * 0.40;
 			
-//			total_marks = quiz + assignment + mids + finals;
-			total_marks = ((obt_quiz/40)*0.1) + ((obt_assignment/40)*0.20) + ((mid_term_marks/40) * 0.30) + ((final_term_marks/60) * 0.40);
+			total_marks = ((obt_quiz/40.0)*10) + ((obt_assignment/40.0)*20) + ((mid_term_marks/40.0) * 30) + ((final_term_marks/60.0) * 40);
+			
 		}
 		
 		void displayData(){
@@ -116,15 +114,26 @@ class Student{
 };
 
 int main(){
-	Student std1;
+	Student* S[3];
 	
-	std1.enterData();
-	cout<<endl;
-	std1.getQuizMarks();
-	std1.calculateResult();
-	cout<<endl;
+	int quiz[4]= {1, 2, 1, 3};
+	int assignment[2] = {5, 7};
+	
+	S[0] = new Student("BC000000000", "Name", quiz, assignment, 25, 45);
+	S[1] = new Student;
+	S[2] = new Student;
+	
+	S[0]->calculateResult();
+	
+	S[1]->enterData();
+	S[1]->calculateResult();
+	
+	S[2] = S[1];
+	
 	cout.setf(ios::left, ios::adjustfield);
 	cout<<setw(15)<<"StudentID"<<setw(15)<<"StudentName"<<setw(15)<<"MidTermMarks"<<setw(15)<<"FinalTermMarks"<<setw(15)<<"TotalMarks"<<endl;
 	cout<<setw(15)<<"---------------"<<setw(15)<<"---------------"<<setw(15)<<"---------------"<<setw(15)<<"---------------"<<setw(15)<<"---------------"<<endl;
-	std1.displayData();
+	S[0]->displayData();
+	S[1]->displayData();
+	S[2]->displayData();
 }
